@@ -1,6 +1,64 @@
 # Django settings for altitude project.
 
-DEBUG = True
+#socket helps us determine if the server is the production server or
+#development server.
+import socket
+
+#Determie what server we are on.
+if socket.gethostname() == "gva-elevate-1":
+    IS_DEV_SERVER = False
+else :
+    IS_DEV_SERVER = True
+
+#Certain settings depend on the server we are on
+if IS_DEV_SERVER:
+    DB_TO_USE = 'django.db.backends.sqlite3'
+    DB_NAME = '/Users/collinbrooks/django_projects/altitude.db'
+    DB_USERNAME = ''
+    DB_PASSWORD = ''
+
+    
+    # Absolute filesystem path to the directory that will hold user-uploaded files.
+    # Example: "/home/media/media.lawrence.com/media/"
+    MEDIA_ROOT = '/Users/collinbrooks/django_projects/media/'
+
+    # URL that handles the media served from MEDIA_ROOT. Make sure to use a
+    # trailing slash.
+    # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+    MEDIA_URL = 'http://localhost/media/'
+
+    TEMPLATE_DIRS = (
+        # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+        # Always use forward slashes, even on Windows.
+        # Don't forget to use absolute paths, not relative paths.
+        "/Users/collinbrooks/django_projects/django_templates/"
+    )
+
+else:
+    DB_TO_USE = 'django.db.backends.mysql'
+    DB_NAME = 'altitude'
+    DB_USERNAME = 'root'
+    DB_PASSWORD = 'Monkey-2'
+
+    # Absolute filesystem path to the directory that will hold user-uploaded files.
+    # Example: "/home/media/media.lawrence.com/media/"
+    MEDIA_ROOT = '/home/administrator/media/'
+
+    # URL that handles the media served from MEDIA_ROOT. Make sure to use a
+    # trailing slash.
+    # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+    MEDIA_URL = 'http://gva-elevate-1/media/'
+
+    TEMPLATE_DIRS = (
+        # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+        # Always use forward slashes, even on Windows.
+        # Don't forget to use absolute paths, not relative paths.
+        "/home/administrator/django_templates"
+    )
+
+
+#Only Debug if we are on the development server
+DEBUG = IS_DEV_SERVER
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -11,10 +69,10 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'altitude',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'Monkey-2',                  # Not used with sqlite3.
+        'ENGINE': DB_TO_USE, # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': DB_NAME,                      # Or path to database file if using sqlite3.
+        'USER': DB_USERNAME,                      # Not used with sqlite3.
+        'PASSWORD': DB_PASSWORD,                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -42,15 +100,6 @@ USE_I18N = True
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
 USE_L10N = True
-
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/home/administrator/media/'
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = 'http://gva-elevate-1/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -103,13 +152,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'altitude.urls'
-
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    "/home/administrator/django_templates"
-)
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 

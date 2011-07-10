@@ -1,12 +1,15 @@
 from django.conf.urls.defaults import patterns, include, url
 
+#Altitude view imports
+from altitude.views import index
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'altitude.home', name = 'index'),
+    url(r'^$', index),
     # url(r'^altitude/', include('altitude.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
