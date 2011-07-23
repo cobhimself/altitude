@@ -1,0 +1,58 @@
+[
+  {
+    "model": "accounts.department",
+    "pk": 1,
+    "fields": {
+      "name": "Animation"
+    }
+  },
+  {
+    "model": "accounts.department",
+    "pk": 2,
+    "fields": {
+      "name": "Art"
+    }
+  },
+  {
+    "model": "accounts.department",
+    "pk": 3,
+    "fields": {
+      "name": "Audio"
+    }
+  },
+  {
+    "model": "accounts.department",
+    "pk": 4,
+    "fields": {
+      "name": "Development"
+    }
+  },
+  {
+    "model": "accounts.department",
+    "pk": 5,
+    "fields": {
+      "name": "Music"
+    }
+  },
+  {
+    "model": "accounts.department",
+    "pk": 6,
+    "fields": {
+      "name": "Production"
+    }
+  },
+  {
+    "model": "accounts.department",
+    "pk": 7,
+    "fields": {
+      "name": "Support"
+    }
+  },
+  {
+    "model": "accounts.department",
+    "pk": 8,
+    "fields": {
+      "name": "Video"
+    }
+  }
+]
